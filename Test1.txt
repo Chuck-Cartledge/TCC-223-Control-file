@@ -4,8 +4,16 @@
 CRM_Database.ser
 </DBFileName>
 </System>
+
 <Create>
 <Surname>
 UmFtb3M=
 </Surname>
+<GivenName>
+SmF2aWVy
+</GivenName>
 </Create>
+
+<Save>
+
+<Exit>
