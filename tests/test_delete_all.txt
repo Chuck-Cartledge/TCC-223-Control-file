@@ -1,0 +1,147 @@
+# test_delete_all.txt
+# Feature: Delete by field criteria (Surname match) and Delete All (reserved CRMID "All")
+#
+# Expected output sequence:
+#   3 clients created (2 Smiths + 1 Jones)
+#   --- INITIAL STATE (3 records) ---
+#   table: Alice Smith, Carol Smith, Bob Jones
+#   [CRM] 2 record(s) deleted.           <- Delete by Surname=Smith
+#   --- AFTER DELETE BY SURNAME (only Jones/Bob should remain) ---
+#   table: Bob Jones (1 row)
+#   2 more clients created (Williams/Dave, Jones/Anna)
+#   --- BEFORE DELETE ALL (3 records) ---
+#   table: Bob Jones, Dave Williams, Anna Jones
+#   [CRM] 3 record(s) deleted.           <- Delete All
+#   --- AFTER DELETE ALL (database must be empty) ---
+#   (empty table)
+#   Delete All test complete.
+
+# --- Step 1: Create 3 clients (2 with Surname=Smith, 1 with Surname=Jones) ---
+<Create>
+<Surname>
+U21pdGg=
+</Surname>
+<GivenName>
+QWxpY2U=
+</GivenName>
+<Telephone>
+NTU1LTEwMDA=
+</Telephone>
+<PostCode>
+MTAwMDE=
+</PostCode>
+</Create>
+
+<Create>
+<Surname>
+U21pdGg=
+</Surname>
+<GivenName>
+Q2Fyb2w=
+</GivenName>
+<Telephone>
+NTU1LTIwMDA=
+</Telephone>
+<PostCode>
+MjAwMDI=
+</PostCode>
+</Create>
+
+<Create>
+<Surname>
+Sm9uZXM=
+</Surname>
+<GivenName>
+Qm9i
+</GivenName>
+<Telephone>
+NTU1LTMwMDA=
+</Telephone>
+<PostCode>
+MzAwMDM=
+</PostCode>
+</Create>
+
+# --- Step 2: Show initial state ---
+<System>
+<Comment>
+--- INITIAL STATE (3 records: 2 Smiths + 1 Jones) ---
+</Comment>
+<Output>
+</Output>
+</System>
+
+# --- Step 3: Delete all clients whose Surname = "Smith" ---
+<Delete>
+<Surname>
+U21pdGg=
+</Surname>
+</Delete>
+
+# --- Step 4: Verify only Jones/Bob remains ---
+<System>
+<Comment>
+--- AFTER DELETE BY SURNAME=SMITH (only Jones/Bob should remain) ---
+</Comment>
+<Output>
+</Output>
+</System>
+
+# --- Step 5: Add 2 more clients to restore a multi-record database ---
+<Create>
+<Surname>
+V2lsbGlhbXM=
+</Surname>
+<GivenName>
+RGF2ZQ==
+</GivenName>
+<Telephone>
+NTU1LTQwMDA=
+</Telephone>
+<PostCode>
+NDAwMDQ=
+</PostCode>
+</Create>
+
+<Create>
+<Surname>
+Sm9uZXM=
+</Surname>
+<GivenName>
+QW5uYQ==
+</GivenName>
+<Telephone>
+NTU1LTUwMDA=
+</Telephone>
+<PostCode>
+NTAwMDU=
+</PostCode>
+</Create>
+
+# --- Step 6: Show state before Delete All ---
+<System>
+<Comment>
+--- BEFORE DELETE ALL (3 records) ---
+</Comment>
+<Output>
+</Output>
+</System>
+
+# --- Step 7: Delete ALL records using reserved CRMID "All" ---
+<Delete>
+<CRMID>
+All
+</CRMID>
+</Delete>
+
+# --- Step 8: Verify database is empty ---
+<System>
+<Comment>
+--- AFTER DELETE ALL (database must be empty) ---
+</Comment>
+<Output>
+</Output>
+<Exit>
+RGVsZXRlIEFsbCB0ZXN0IGNvbXBsZXRlLg==
+</Exit>
+</System>

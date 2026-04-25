@@ -1,0 +1,65 @@
+# test_errors.txt
+# Feature: Error handling — invalid inputs produce descriptive messages, program does not crash.
+#
+# Cases covered:
+#   1. Create with missing required field GivenName  -> warning, record skipped
+#   2. Update a CRMID that does not exist            -> error, no change
+#   3. Delete a CRMID that does not exist            -> error, no change
+#   4. Lowercase block tag <create>                  -> silently ignored
+#
+# Expected output:
+#   [CRM] Warning: Missing required fields. Skipping record.    (stderr, case 1)
+#   [CRM] Update failed: CRMID not found -> FAKE-999            (stderr, case 2)
+#   [CRM] Delete failed: CRMID not found -> FAKE-999            (stderr, case 3)
+#   (no output for case 4 — silently ignored)
+#   --- ALL ERROR CASES DEMONSTRATED (database must be empty) ---
+#   (empty table — no records created due to errors)
+#   Error handling test complete.
+
+# --- Case 1: Create with no GivenName (required field missing) ---
+# Expected: [CRM] Warning: Missing required fields. Skipping record.
+<Create>
+<Surname>
+U21pdGg=
+</Surname>
+</Create>
+
+# --- Case 2: Update a CRMID that does not exist in the database ---
+# Expected: [CRM] Update failed: CRMID not found -> FAKE-999
+<Update>
+<CRMID>
+FAKE-999
+</CRMID>
+<GivenName>
+SmFuZQ==
+</GivenName>
+</Update>
+
+# --- Case 3: Delete a CRMID that does not exist in the database ---
+# Expected: [CRM] Delete failed: CRMID not found -> FAKE-999
+<Delete>
+<CRMID>
+FAKE-999
+</CRMID>
+</Delete>
+
+# --- Case 4: Lowercase block tag is silently ignored (no crash, no output) ---
+<create>
+<Surname>
+U21pdGg=
+</Surname>
+<GivenName>
+Qm9i
+</GivenName>
+</create>
+
+<System>
+<Comment>
+--- ALL ERROR CASES DEMONSTRATED (database must be empty — no records created) ---
+</Comment>
+<Output>
+</Output>
+<Exit>
+RXJyb3IgaGFuZGxpbmcgdGVzdCBjb21wbGV0ZS4=
+</Exit>
+</System>

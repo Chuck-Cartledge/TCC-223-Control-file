@@ -1,0 +1,69 @@
+# test_create.txt
+# Feature: Create (full fields), Output (all records)
+#
+# Expected output:
+#   [CRM] Client created: Alice Smith    | CRMID: <uuid>
+#   [CRM] Client created: Bob Jones      | CRMID: <uuid>
+#   [CRM] Client created: Dave Williams  | CRMID: <uuid>
+#   --- ALL CREATED RECORDS (3 clients) ---
+#   CRMID table with all 3 rows
+#   Create test complete.
+
+# --- Client 1: Smith / Alice ---
+<Create>
+<Surname>
+U21pdGg=
+</Surname>
+<GivenName>
+QWxpY2U=
+</GivenName>
+<Telephone>
+NTU1LTEwMDA=
+</Telephone>
+<PostCode>
+MTAwMDE=
+</PostCode>
+</Create>
+
+# --- Client 2: Jones / Bob ---
+<Create>
+<Surname>
+Sm9uZXM=
+</Surname>
+<GivenName>
+Qm9i
+</GivenName>
+<Telephone>
+NTU1LTMwMDA=
+</Telephone>
+<PostCode>
+MzAwMDM=
+</PostCode>
+</Create>
+
+# --- Client 3: Williams / Dave ---
+<Create>
+<Surname>
+V2lsbGlhbXM=
+</Surname>
+<GivenName>
+RGF2ZQ==
+</GivenName>
+<Telephone>
+NTU1LTQwMDA=
+</Telephone>
+<PostCode>
+NDAwMDQ=
+</PostCode>
+</Create>
+
+<System>
+<Comment>
+--- ALL CREATED RECORDS (3 clients) ---
+</Comment>
+<Output>
+</Output>
+<Exit>
+Q3JlYXRlIHRlc3QgY29tcGxldGUu
+</Exit>
+</System>

@@ -1,0 +1,82 @@
+# test_trace.txt
+# Feature: Trace ON/OFF — verifies [TRACE] logs appear when enabled and stop when disabled
+#
+# Expected output sequence:
+#   [CRM] No existing database found. Starting fresh.
+#   [TRACE] Tag detected: <Create> (block=)
+#   [TRACE] Base64 decode: ... -> ...     (multiple trace lines during Create)
+#   [TRACE] HashMap.put: CRMID=TEST-001
+#   [CRM] Client created: Alice TEST_OVERRIDE | CRMID: TEST-001
+#   [TRACE] lines during Output...
+#   table: TEST-001 / Alice
+#   --- TRACE OFF ---
+#   [CRM] Client created: Bob Jones | CRMID: <uuid>   (no [TRACE] lines)
+#   table: TEST-001 / Alice, <uuid> / Bob Jones
+#   Trace test complete.
+
+# --- Step 1: Enable trace logging ---
+<System>
+<Trace>
+T04=
+</Trace>
+</System>
+
+# --- Step 2: Create a client — [TRACE] logs should appear for every internal step ---
+<Create>
+<Surname>
+VEVTVF9PVkVSUklERQ==
+</Surname>
+<GivenName>
+QWxpY2U=
+</GivenName>
+<Telephone>
+NTU1LTEwMDA=
+</Telephone>
+<PostCode>
+MTAwMDE=
+</PostCode>
+</Create>
+
+# --- Step 3: Output — [TRACE] logs should appear during the retrieval pass ---
+<System>
+<Comment>
+--- TRACE ON: output above should contain [TRACE] lines ---
+</Comment>
+<Output>
+</Output>
+</System>
+
+# --- Step 4: Disable trace logging ---
+<System>
+<Trace>
+T0ZG
+</Trace>
+</System>
+
+# --- Step 5: Create another client — no [TRACE] lines should appear ---
+<Create>
+<Surname>
+Sm9uZXM=
+</Surname>
+<GivenName>
+Qm9i
+</GivenName>
+<Telephone>
+NTU1LTMwMDA=
+</Telephone>
+<PostCode>
+MzAwMDM=
+</PostCode>
+</Create>
+
+# --- Step 6: Output — no [TRACE] lines should appear ---
+<System>
+<Comment>
+--- TRACE OFF: no [TRACE] lines should appear above ---
+</Comment>
+<Output>
+</Output>
+<Exit>
+VHJhY2UgdGVzdCBjb21wbGV0ZS4=
+</Exit>
+</System>

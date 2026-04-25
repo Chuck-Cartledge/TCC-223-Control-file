@@ -1,0 +1,88 @@
+# test_update.txt
+# Feature: Update — single-field and multi-field updates by CRMID
+#
+# Uses TEST_OVERRIDE to assign predictable CRMID = TEST-001.
+#
+# Expected output sequence:
+#   [CRM] Client created: John TEST_OVERRIDE | CRMID: TEST-001
+#   --- INITIAL STATE ---
+#   TEST-001  TEST_OVERRIDE  John  555-1000  10001
+#   [CRM] 1 record updated | CRMID: TEST-001
+#   --- AFTER SINGLE-FIELD UPDATE (GivenName: John -> Jane) ---
+#   TEST-001  TEST_OVERRIDE  Jane  555-1000  10001
+#   [CRM] 1 record updated | CRMID: TEST-001
+#   --- AFTER MULTI-FIELD UPDATE (Surname + Telephone + PostCode) ---
+#   TEST-001  Smith  Jane  555-9999  99999
+#   Update test complete.
+
+# --- Step 1: Create a client with a predictable CRMID ---
+<Create>
+<Surname>
+VEVTVF9PVkVSUklERQ==
+</Surname>
+<GivenName>
+Sm9obg==
+</GivenName>
+<Telephone>
+NTU1LTEwMDA=
+</Telephone>
+<PostCode>
+MTAwMDE=
+</PostCode>
+</Create>
+
+# --- Step 2: Show initial state ---
+<System>
+<Comment>
+--- INITIAL STATE (CRMID = TEST-001) ---
+</Comment>
+<Output>
+</Output>
+</System>
+
+# --- Step 3: Update GivenName only (John -> Jane) ---
+<Update>
+<CRMID>
+TEST-001
+</CRMID>
+<GivenName>
+SmFuZQ==
+</GivenName>
+</Update>
+
+# --- Step 4: Verify single-field update ---
+<System>
+<Comment>
+--- AFTER SINGLE-FIELD UPDATE (GivenName: John -> Jane) ---
+</Comment>
+<Output>
+</Output>
+</System>
+
+# --- Step 5: Update Surname, Telephone, and PostCode simultaneously ---
+<Update>
+<CRMID>
+TEST-001
+</CRMID>
+<Surname>
+U21pdGg=
+</Surname>
+<Telephone>
+NTU1LTk5OTk=
+</Telephone>
+<PostCode>
+OTk5OTk=
+</PostCode>
+</Update>
+
+# --- Step 6: Verify multi-field update ---
+<System>
+<Comment>
+--- AFTER MULTI-FIELD UPDATE (Surname + Telephone + PostCode changed) ---
+</Comment>
+<Output>
+</Output>
+<Exit>
+VXBkYXRlIHRlc3QgY29tcGxldGUu
+</Exit>
+</System>

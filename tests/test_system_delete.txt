@@ -1,0 +1,71 @@
+# test_system_delete.txt
+# Feature: System Delete — removes the physical database file from disk.
+#
+# This test verifies that System <Delete> deletes the file AND that the
+# in-memory HashMap is not affected (records remain accessible after file deletion).
+#
+# Expected output:
+#   [CRM] No existing database found. Starting fresh.   (or "Database loaded" on re-run)
+#   [CRM] Client created: Alice Smith | CRMID: <uuid>
+#   [CRM] Database saved: CSC223-DELETE-DB (1 records)
+#   [CRM] Database file deleted: CSC223-DELETE-DB
+#   [CRM] No existing database found. Starting fresh.   <- proves file was deleted
+#   --- IN-MEMORY DATA PERSISTS AFTER FILE DELETION ---
+#   table: Alice Smith (1 row — in-memory HashMap was not cleared)
+#   System delete test complete.
+
+# --- Step 1: Initialize and load database ---
+<System>
+<DBFileName>
+Q1NDMjIzLURFTEVURS1EQg==
+</DBFileName>
+</System>
+
+# --- Step 2: Create one client ---
+<Create>
+<Surname>
+U21pdGg=
+</Surname>
+<GivenName>
+QWxpY2U=
+</GivenName>
+<Telephone>
+NTU1LTEwMDA=
+</Telephone>
+<PostCode>
+MTAwMDE=
+</PostCode>
+</Create>
+
+# --- Step 3: Save to disk ---
+<System>
+<Save>
+</Save>
+</System>
+
+# --- Step 4: System Delete — removes the physical file from disk ---
+<System>
+<Delete>
+</Delete>
+</System>
+
+# --- Step 5: Attempt to reload the deleted file ---
+# Expected: "[CRM] No existing database found. Starting fresh."
+# This confirms the file was successfully deleted by Step 4.
+<System>
+<DBFileName>
+Q1NDMjIzLURFTEVURS1EQg==
+</DBFileName>
+</System>
+
+# --- Step 6: Output — in-memory data still exists despite file deletion ---
+<System>
+<Comment>
+--- IN-MEMORY DATA PERSISTS AFTER FILE DELETION (Alice Smith must still appear) ---
+</Comment>
+<Output>
+</Output>
+<Exit>
+U3lzdGVtIGRlbGV0ZSB0ZXN0IGNvbXBsZXRlLg==
+</Exit>
+</System>

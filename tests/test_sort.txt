@@ -1,0 +1,109 @@
+# test_sort.txt
+# Feature: Sort — single-field sort and multi-field (cumulative) sort
+#
+# Creates 4 clients: Williams/Dave, Jones/Bob, Smith/Alice, Jones/Anna.
+# Jones appears twice to demonstrate that multi-field sort (Surname + GivenName)
+# correctly orders Anna before Bob when Surname ties.
+#
+# Expected output sequence:
+#   4 clients created
+#   --- SINGLE-FIELD SORT: Surname ---
+#   Jones/?, Jones/?, Smith/Alice, Williams/Dave   (Jones pair in any order)
+#   --- MULTI-FIELD SORT: Surname then GivenName ---
+#   Jones/Anna, Jones/Bob, Smith/Alice, Williams/Dave   (Anna < Bob)
+#   Sort test complete.
+
+# --- Step 1: Create 4 clients with deliberately mixed-order surnames ---
+<Create>
+<Surname>
+V2lsbGlhbXM=
+</Surname>
+<GivenName>
+RGF2ZQ==
+</GivenName>
+<Telephone>
+NTU1LTQwMDA=
+</Telephone>
+<PostCode>
+NDAwMDQ=
+</PostCode>
+</Create>
+
+<Create>
+<Surname>
+Sm9uZXM=
+</Surname>
+<GivenName>
+Qm9i
+</GivenName>
+<Telephone>
+NTU1LTMwMDA=
+</Telephone>
+<PostCode>
+MzAwMDM=
+</PostCode>
+</Create>
+
+<Create>
+<Surname>
+U21pdGg=
+</Surname>
+<GivenName>
+QWxpY2U=
+</GivenName>
+<Telephone>
+NTU1LTEwMDA=
+</Telephone>
+<PostCode>
+MTAwMDE=
+</PostCode>
+</Create>
+
+# Second Jones client — same surname as Bob, different given name
+<Create>
+<Surname>
+Sm9uZXM=
+</Surname>
+<GivenName>
+QW5uYQ==
+</GivenName>
+<Telephone>
+NTU1LTUwMDA=
+</Telephone>
+<PostCode>
+NTAwMDU=
+</PostCode>
+</Create>
+
+# --- Step 2: Sort by Surname only (Jones pair may appear in either order) ---
+<Sort>
+<Surname>
+</Surname>
+</Sort>
+
+<System>
+<Comment>
+--- SINGLE-FIELD SORT: Surname (Jones pair order not guaranteed) ---
+</Comment>
+<Output>
+</Output>
+</System>
+
+# --- Step 3: Sort by Surname then GivenName (Jones/Anna must appear before Jones/Bob) ---
+<Sort>
+<Surname>
+</Surname>
+<GivenName>
+</GivenName>
+</Sort>
+
+<System>
+<Comment>
+--- MULTI-FIELD SORT: Surname + GivenName (Jones/Anna before Jones/Bob guaranteed) ---
+</Comment>
+<Output>
+</Output>
+<Exit>
+U29ydCB0ZXN0IGNvbXBsZXRlLg==
+</Exit>
+</System>

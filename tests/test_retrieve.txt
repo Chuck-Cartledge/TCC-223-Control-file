@@ -1,0 +1,86 @@
+# test_retrieve.txt
+# Feature: Retrieve by exact CRMID, then Output the result; Output all records
+#
+# Uses TEST_OVERRIDE to assign predictable CRMID = TEST-001 for targeted retrieval.
+#
+# Expected output sequence:
+#   3 clients created: Alice (TEST-001), Bob Smith (uuid), Carol Smith (uuid)
+#   --- RETRIEVE BY CRMID = TEST-001 ---
+#   table: 1 row — TEST-001 / Alice only
+#   --- OUTPUT ALL RECORDS (no Retrieve filter) ---
+#   table: all 3 rows
+#   Retrieve test complete.
+
+# --- Step 1: Create a client with a predictable CRMID for targeted retrieval ---
+<Create>
+<Surname>
+VEVTVF9PVkVSUklERQ==
+</Surname>
+<GivenName>
+QWxpY2U=
+</GivenName>
+<Telephone>
+NTU1LTEwMDA=
+</Telephone>
+<PostCode>
+MTAwMDE=
+</PostCode>
+</Create>
+
+# --- Step 2: Create 2 more clients with random CRMIDs ---
+<Create>
+<Surname>
+U21pdGg=
+</Surname>
+<GivenName>
+Qm9i
+</GivenName>
+<Telephone>
+NTU1LTMwMDA=
+</Telephone>
+<PostCode>
+MzAwMDM=
+</PostCode>
+</Create>
+
+<Create>
+<Surname>
+U21pdGg=
+</Surname>
+<GivenName>
+Q2Fyb2w=
+</GivenName>
+<Telephone>
+NTU1LTIwMDA=
+</Telephone>
+<PostCode>
+MjAwMDI=
+</PostCode>
+</Create>
+
+# --- Step 3: Retrieve only the TEST-001 record and output it ---
+<Retrieve>
+<CRMID>
+TEST-001
+</CRMID>
+</Retrieve>
+
+<System>
+<Comment>
+--- RETRIEVE BY CRMID = TEST-001 (must show exactly 1 row: Alice) ---
+</Comment>
+<Output>
+</Output>
+</System>
+
+# --- Step 4: Output all records (no Retrieve filter — searchID cleared after step 3 Output) ---
+<System>
+<Comment>
+--- OUTPUT ALL RECORDS (no Retrieve filter — must show all 3 rows) ---
+</Comment>
+<Output>
+</Output>
+<Exit>
+UmV0cmlldmUgdGVzdCBjb21wbGV0ZS4=
+</Exit>
+</System>

@@ -1,0 +1,28 @@
+# test_persist_read.txt
+# Feature: Persistence — Load the database from disk and verify records survive restart.
+# Run test_persist_write.txt FIRST to create the database file before running this.
+#
+# Expected output:
+#   [CRM] Database loaded: CSC223-PERSIST-DB (2 records)
+#   --- RECORDS LOADED FROM DISK ---
+#   table: Alice Smith, Bob Jones (2 rows with the UUIDs assigned during write)
+#   Persistence read complete. Records loaded from file.
+
+# --- Step 1: Load the existing database from disk ---
+<System>
+<DBFileName>
+Q1NDMjIzLVBFUlNJU1QtREI=
+</DBFileName>
+</System>
+
+# --- Step 2: Output all loaded records ---
+<System>
+<Comment>
+--- RECORDS LOADED FROM DISK (must show Smith and Jones) ---
+</Comment>
+<Output>
+</Output>
+<Exit>
+UGVyc2lzdGVuY2UgcmVhZCBjb21wbGV0ZS4gUmVjb3JkcyBsb2FkZWQgZnJvbSBmaWxlLg==
+</Exit>
+</System>

@@ -1,0 +1,57 @@
+# test_persist_write.txt
+# Feature: Persistence — Create clients and Save to a binary database file.
+# Run this file FIRST, then run test_persist_read.txt to verify the records load correctly.
+#
+# Expected output:
+#   [CRM] No existing database found. Starting fresh.   (first run)
+#   [CRM] Client created: Alice Smith  | CRMID: <uuid>
+#   [CRM] Client created: Bob Jones    | CRMID: <uuid>
+#   [CRM] Database saved: CSC223-PERSIST-DB (2 records)
+#   Persistence test complete. Run test_persist_read.txt next.
+
+# --- Step 1: Initialize the database file ---
+<System>
+<DBFileName>
+Q1NDMjIzLVBFUlNJU1QtREI=
+</DBFileName>
+</System>
+
+# --- Step 2: Create 2 clients ---
+<Create>
+<Surname>
+U21pdGg=
+</Surname>
+<GivenName>
+QWxpY2U=
+</GivenName>
+<Telephone>
+NTU1LTEwMDA=
+</Telephone>
+<PostCode>
+MTAwMDE=
+</PostCode>
+</Create>
+
+<Create>
+<Surname>
+Sm9uZXM=
+</Surname>
+<GivenName>
+Qm9i
+</GivenName>
+<Telephone>
+NTU1LTMwMDA=
+</Telephone>
+<PostCode>
+MzAwMDM=
+</PostCode>
+</Create>
+
+# --- Step 3: Save the in-memory database to disk ---
+<System>
+<Save>
+</Save>
+<Exit>
+UGVyc2lzdGVuY2UgdGVzdCBjb21wbGV0ZS4gUnVuIHRlc3RfcGVyc2lzdF9yZWFkLnR4dCBuZXh0Lg==
+</Exit>
+</System>

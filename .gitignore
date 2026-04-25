@@ -2,8 +2,6 @@
 out/
 .DS_Store
 *.ser
-*.md
-*.txt
 CSC-223-CRM_database
 CRM_Database.ser
 persist_acid_test

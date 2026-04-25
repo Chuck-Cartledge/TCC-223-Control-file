@@ -1,0 +1,73 @@
+# test_delete_by_id.txt
+# Feature: Delete by exact CRMID — successful delete and not-found error case
+#
+# Uses TEST_OVERRIDE to assign predictable CRMID = TEST-001.
+#
+# Expected output sequence:
+#   [CRM] Client created: Alice TEST_OVERRIDE | CRMID: TEST-001
+#   --- INITIAL STATE (1 record) ---
+#   TEST-001  TEST_OVERRIDE  Alice  555-1000  10001
+#   [CRM] 1 record deleted | CRMID: TEST-001
+#   --- AFTER DELETE (database must be empty) ---
+#   (empty table — no rows)
+#   [CRM] Delete failed: CRMID not found -> FAKE-999    (stderr)
+#   --- NON-EXISTENT CRMID DELETE ATTEMPTED (error above is expected) ---
+#   Delete by ID test complete.
+
+# --- Step 1: Create a client with a predictable CRMID ---
+<Create>
+<Surname>
+VEVTVF9PVkVSUklERQ==
+</Surname>
+<GivenName>
+QWxpY2U=
+</GivenName>
+<Telephone>
+NTU1LTEwMDA=
+</Telephone>
+<PostCode>
+MTAwMDE=
+</PostCode>
+</Create>
+
+# --- Step 2: Show initial state ---
+<System>
+<Comment>
+--- INITIAL STATE (1 record) ---
+</Comment>
+<Output>
+</Output>
+</System>
+
+# --- Step 3: Delete the record by its exact CRMID ---
+<Delete>
+<CRMID>
+TEST-001
+</CRMID>
+</Delete>
+
+# --- Step 4: Verify the database is now empty ---
+<System>
+<Comment>
+--- AFTER DELETE (database must be empty) ---
+</Comment>
+<Output>
+</Output>
+</System>
+
+# --- Step 5: Attempt to delete a CRMID that does not exist ---
+# Expected: [CRM] Delete failed: CRMID not found -> FAKE-999
+<Delete>
+<CRMID>
+FAKE-999
+</CRMID>
+</Delete>
+
+<System>
+<Comment>
+--- NON-EXISTENT CRMID DELETE ATTEMPTED (error message above is expected) ---
+</Comment>
+<Exit>
+RGVsZXRlIGJ5IElEIHRlc3QgY29tcGxldGUu
+</Exit>
+</System>
