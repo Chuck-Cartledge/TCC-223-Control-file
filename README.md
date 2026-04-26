@@ -1,3 +1,9 @@
+**Developed by:** Javier Ramos and Valor Guzman
+
+## **Course:** Data Structures and Analysis of Algorithms - CSC.223.D01B.SP26
+
+---
+
 # Java CRM System — Control-File-Driven Client Management
 
 A command-line **Customer Relationship Management (CRM)** system written in Java that reads a plain-text, XML-like control file and performs full CRUD (Create, Retrieve, Update, Delete) operations on a serialized client database. The program decodes Base64-encoded field values at runtime, giving control files a layer of encoding that separates raw user data from the script format. Built as a data structures project for CSC223, it demonstrates key ADT concepts including `HashMap` for O(1) record lookup, object serialization for persistence, and a comparator chaining strategy for multi field sorting. The system is designed for batch execution: one control file drives an entire workflow from database initialization through record management to program exit.
